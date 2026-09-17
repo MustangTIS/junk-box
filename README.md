@@ -15,6 +15,8 @@
   * 指定フォルダのアクセス権（所有者・ACL）を強制リセットし、Administrators / SYSTEM のフルコントロールを再付与するGUI付きPowerShellスクリプト。
 
 ### 🌐 Web Tools (`web-tools/`)
+* **automation_sitemaps**
+  * 指定Webサイトを自動クロールしてディレクトリ階層を解析し、エクスプローラ風ツリーGUIで登録ON/OFFやPriorityの調整ができる sitemap.xml 生成ツール。
 * **canonical-injector**
   * Webサイトのメンテナンスや移行時に役立つcanonicalタグの注入・管理ツール。
 
