@@ -19,7 +19,8 @@
   * 指定Webサイトを自動クロールしてディレクトリ階層を解析し、エクスプローラ風ツリーGUIで登録ON/OFFやPriorityの調整ができる sitemap.xml 生成ツール。
 * **canonical-injector**
   * Webサイトのメンテナンスや移行時に役立つcanonicalタグの注入・管理ツール。
-
+* **link_map_visualizer**
+  * 指定Webサイトを再帰的にクロールし、内部リンク構造や404エラー状態をpyvisでインタラクティブなHTMLマップとして視覚化・診断するツール。
 ---
 
 ## 🚀 使い方
