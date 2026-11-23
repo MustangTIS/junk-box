@@ -1,4 +1,5 @@
 import tkinter as tk
+from xml.sax.saxutils import escape
 from tkinter import ttk, messagebox, filedialog, simpledialog
 import urllib.request
 import urllib.parse
@@ -18,8 +19,9 @@ class SimpleLinkParser(HTMLParser):
                 if attr.lower() == 'href':
                     full_url = urllib.parse.urljoin(self.base_url, value)
                     parsed = urllib.parse.urlparse(full_url)
-                    clean_url = f"{parsed.scheme}://{parsed.netloc}{parsed.path}"
-                    
+                    path = parsed.path if parsed.path else "/"
+                    clean_url = f"{parsed.scheme}://{parsed.netloc}{path}"
+
                     base_parsed = urllib.parse.urlparse(self.base_url)
                     if parsed.netloc == base_parsed.netloc:
                         self.links.add(clean_url)
@@ -216,11 +218,18 @@ class SitemapGUI:
                     url = text
 
                 if url:
-                    priority = vals[1]
+                    try:
+                        pri_val = float(vals[1])
+                        if not (0.0 <= pri_val <= 1.0):
+                            pri_val = 0.6
+                        priority = f"{pri_val:.1f}"
+                    except (ValueError, TypeError):
+                        priority = "0.6"
+
                     xml_content.append("  <url>")
-                    xml_content.append(f"    <loc>{url}</loc>")
+                    xml_content.append(f"    <loc>{escape(url)}</loc>")
                     xml_content.append(f"    <lastmod>{today}</lastmod>")
-                    xml_content.append(f"    <changefreq>weekly</changefreq>")
+                    xml_content.append("    <changefreq>weekly</changefreq>")
                     xml_content.append(f"    <priority>{priority}</priority>")
                     xml_content.append("  </url>")
                     count += 1
